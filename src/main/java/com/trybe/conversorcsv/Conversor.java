@@ -10,6 +10,7 @@ import java.io.IOException;
 /**Classe conversor.*/
 public class Conversor {
 
+  /** Função utilizada apenas para validação da solução do desafio.*/
   public static void main(String[] args) throws IOException {
     File pastaDeEntradas = new File("./entradas/");
     File pastaDeSaidas = new File("./saidas/");
