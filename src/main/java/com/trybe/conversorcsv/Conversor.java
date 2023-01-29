@@ -7,9 +7,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/**Classe conversor.*/
+/** Classe conversor. */
 public class Conversor {
-
+	
   /** Função utilizada apenas para validação da solução do desafio.*/
   public static void main(String[] args) throws IOException {
     File pastaDeEntradas = new File("./entradas/");
@@ -18,16 +18,17 @@ public class Conversor {
   }
 
   /**
-   * Converte todos os arquivos CSV da pasta de entradas. Os resultados são gerados
-   * na pasta de saídas, deixando os arquivos originais inalterados.
-   *
-   * @param pastaDeEntradas Pasta contendo os arquivos CSV gerados pela página web.
-   * @param pastaDeSaidas Pasta em que serão colocados os arquivos gerados no formato
-   *                      requerido pelo subsistema.
-   *
-   * @throws IOException Caso ocorra algum problema ao ler os arquivos de entrada ou
-   *                     gravar os arquivos de saída.
-   */
+  * Converte todos os arquivos CSV da pasta de entradas. Os resultados são
+  * gerados na pasta de saídas, deixando os arquivos originais inalterados.
+  *
+  * @param pastaDeEntradas Pasta contendo os arquivos CSV gerados pela página
+  *                        web.
+  * @param pastaDeSaidas   Pasta em que serão colocados os arquivos gerados no
+  *                        formato requerido pelo subsistema.
+  *
+  * @throws IOException Caso ocorra algum problema ao ler os arquivos de entrada
+  *                     ou gravar os arquivos de saída.
+  */
   public void converterPasta(File pastaDeEntradas, File pastaDeSaidas) throws IOException {
     File pastaSaida = null;
     FileReader leitorArquivo = null;
@@ -50,11 +51,12 @@ public class Conversor {
         String informacoesLinha = bufferedLeitor.readLine();
 
         while (informacoesLinha != null) {
-          if (!informacoesLinha.contains("Nome Completo")) {
-            String linhaEditada = editarLinha(informacoesLinha);
-            bufferedEscritor.write(linhaEditada);
+          if (!informacoesLinha.contains("Nome completo")) {
+            String linhaFormatada = editarLinha(informacoesLinha);
+            bufferedEscritor.write(linhaFormatada);
             bufferedEscritor.newLine();
             bufferedEscritor.flush();
+
           } else {
             bufferedEscritor.write(informacoesLinha);
             bufferedEscritor.newLine();
@@ -63,11 +65,11 @@ public class Conversor {
           informacoesLinha = bufferedLeitor.readLine();
         }
       }
+      leitorArquivo.close();
+      bufferedLeitor.close();
+      escritorArquivo.close();
+      bufferedEscritor.close();
     }
-    leitorArquivo.close();
-    bufferedLeitor.close();
-    escritorArquivo.close();
-    bufferedEscritor.close();
   }
 
   private String editarLinha(String informacoesLinha) {
@@ -76,11 +78,10 @@ public class Conversor {
     String[] data = informacoesSeparadas[1].split("/");
     String dataFormatada = data[2] + "-" + data[1] + "-" + data[0];
     String email = informacoesSeparadas[2];
-    String cpf = informacoesSeparadas[3]
-        .replaceAll("^(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+    String cpf = informacoesSeparadas[3].replaceAll("^(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
 
     String formatoLinha = nome + "," + dataFormatada + "," + email + "," + cpf;
-    
-    return formatoLinha; 
+
+    return formatoLinha;
   }
 }
