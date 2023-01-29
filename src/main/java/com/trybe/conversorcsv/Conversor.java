@@ -9,7 +9,7 @@ import java.io.IOException;
 
 /** Classe conversor. */
 public class Conversor {
-	
+
   /** Função utilizada apenas para validação da solução do desafio.*/
   public static void main(String[] args) throws IOException {
     File pastaDeEntradas = new File("./entradas/");
@@ -78,7 +78,8 @@ public class Conversor {
     String[] data = informacoesSeparadas[1].split("/");
     String dataFormatada = data[2] + "-" + data[1] + "-" + data[0];
     String email = informacoesSeparadas[2];
-    String cpf = informacoesSeparadas[3].replaceAll("^(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+    String cpf = informacoesSeparadas[3]
+            .replaceAll("^(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
 
     String formatoLinha = nome + "," + dataFormatada + "," + email + "," + cpf;
 
